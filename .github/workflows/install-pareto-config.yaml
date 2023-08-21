@@ -6,7 +6,7 @@ on:
       function-app-name:  
         description: 'Function Name'
         required: true
-        default: 'pareto-handler-function'
+        default: 'amd-pareto-handler-function'
 
       iot-hub-name:
         description: 'IOT Hub Name'
