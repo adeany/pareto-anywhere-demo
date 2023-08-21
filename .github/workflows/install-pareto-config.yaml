@@ -29,7 +29,7 @@ env:
   AZURE_FUNCTIONAPP_NAME: 'pareto-function-apps'  
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'    
   NODE_VERSION: '16.x' 
-  DEVICE_NAME: 'iot-pareto-device'
+  DEVICE_NAME: 'amd-pareto-device'
   Config-hubname: ''
   Config-hubendpoint: ''
   Config-eventhubName: ''
