@@ -16,7 +16,7 @@ on:
       resource_group:
         description: 'Resource Group Name - setup in shell script'
         required: true
-        default: 'dohoney-pareto-poc'
+        default: 'amd-pareto-poc'
 
       azure_region:
         description: 'Azure Region'
