@@ -11,7 +11,7 @@ on:
       iot-hub-name:
         description: 'IOT Hub Name'
         required: true
-        default: 'paretoIOTHub'
+        default: 'amdparetodemoIOTHub'
 
       resource_group:
         description: 'Resource Group Name - setup in shell script'
