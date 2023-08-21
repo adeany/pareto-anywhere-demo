@@ -2,10 +2,10 @@
 
 # Environment Variables
 export SUBSCRIPTION_ID=""
-export RESOURCE_GROUP="dohoney-pareto-poc"
+export RESOURCE_GROUP="amd-pareto-poc"
 export LOCATION="westus"
 export SERVICE_PRINCIPAL_NAME="pareto-serviceprincipal"
-export GITHUB_REPO="https://github.com/johndohoneyjr/pareto-anywhere-azure-prod"
+export GITHUB_REPO="https://github.com/adeany/pareto-anywhere-demo"
 
 
 # Make sure github cli is installed -- for adding the secret to GH Actions
