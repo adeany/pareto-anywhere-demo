@@ -26,10 +26,10 @@ on:
 # Environment Variables
 env:
   HUB_RULE_NAME: "aruba-hub-rule"
-  AZURE_FUNCTIONAPP_NAME: 'pareto-function-apps'  
+  AZURE_FUNCTIONAPP_NAME: 'pareto-function-apps2'  
   AZURE_FUNCTIONAPP_PACKAGE_PATH: '.'    
   NODE_VERSION: '16.x' 
-  DEVICE_NAME: 'amd-pareto-device'
+  DEVICE_NAME: 'amd-pareto-device2'
   Config-hubname: ''
   Config-hubendpoint: ''
   Config-eventhubName: ''
