@@ -2,6 +2,10 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "region": {
+            "defaultValue": "West US",
+            "type": "String"
+        },
         "namespaces_aruba19508_name": {
             "defaultValue": "aruba19508",
             "type": "String"
@@ -37,7 +41,7 @@
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
             "name": "[parameters('namespaces_aruba19508_name')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "Standard",
                 "tier": "Standard",
@@ -172,7 +176,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-09-01",
             "name": "[parameters('serverfarms_pareto_premium_plan_21281_name')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "EP1",
                 "tier": "ElasticPremium",
@@ -628,7 +632,7 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-09-01",
             "name": "[parameters('sites_amd_pareto_handler_function25_name')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]"
             ],
@@ -680,7 +684,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
             "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/ftp')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
@@ -692,7 +696,7 @@
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
             "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/scm')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
@@ -704,7 +708,7 @@
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-09-01",
             "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/web')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
@@ -776,25 +780,6 @@
                 "functionsRuntimeScaleMonitoringEnabled": false,
                 "minimumElasticInstanceCount": 1,
                 "azureStorageAccounts": {}
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/33672b2e6ca8421b9dbe7b5ef25b3689')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY_FUNCTIONS_V1",
-                "message": "{\"type\":\"deployment\",\"sha\":\"5a3b81a5ba23f4131607101d0277805e7068dcbb\",\"repoName\":\"adeany/pareto-anywhere-demo\",\"actor\":\"adeany\",\"slotName\":\"production\"}",
-                "start_time": "2023-09-25T22:24:53.8351804Z",
-                "end_time": "2023-09-25T22:24:55.3531945Z",
-                "active": true
             }
         }
     ]
