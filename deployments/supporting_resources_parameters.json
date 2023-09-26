@@ -25,6 +25,12 @@
         },
         "components_amd_pareto_handler_function25_name": {
             "value": null
+        },
+        "IotHubs_amdparetodemoIOTHub25_name": {
+            "value": null
+        },
+        "eventhub_name": {
+            "value": null
         }
     }
 }
