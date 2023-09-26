@@ -30,25 +30,6 @@
     "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/33672b2e6ca8421b9dbe7b5ef25b3689')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY_FUNCTIONS_V1",
-                "message": "{\"type\":\"deployment\",\"sha\":\"5a3b81a5ba23f4131607101d0277805e7068dcbb\",\"repoName\":\"adeany/pareto-anywhere-demo\",\"actor\":\"adeany\",\"slotName\":\"production\"}",
-                "start_time": "2023-09-25T22:24:53.8351804Z",
-                "end_time": "2023-09-25T22:24:55.3531945Z",
-                "active": true
-            }
-        },
-        {
             "type": "Microsoft.Web/sites/functions",
             "apiVersion": "2022-09-01",
             "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/negotiateConnection')]",
@@ -57,13 +38,13 @@
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/",
-                "script_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/index.js",
-                "config_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/function.json",
-                "test_data_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/data/Functions/sampledata/negotiateConnection.dat",
-                "href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/functions/negotiateConnection",
+                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/')]",
+                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/negotiateConnection.dat')]",
+                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/negotiateConnection')]",
                 "config": {},
-                "invoke_url_template": "https://amd-pareto-handler-function25.azurewebsites.net/app/wsconnection",
+                "invoke_url_template": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/app/wsconnection')]",
                 "language": "node",
                 "isDisabled": false
             }
@@ -77,11 +58,11 @@
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/",
-                "script_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/index.js",
-                "config_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/function.json",
-                "test_data_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/data/Functions/sampledata/processIoTHubMessages.dat",
-                "href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/functions/processIoTHubMessages",
+                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/')]",
+                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/processIoTHubMessages.dat')]",
+                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/processIoTHubMessages')]",
                 "config": {},
                 "language": "node",
                 "isDisabled": false
@@ -96,55 +77,15 @@
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/",
-                "script_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/index.js",
-                "config_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/function.json",
-                "test_data_href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/vfs/data/Functions/sampledata/serveWebApp.dat",
-                "href": "https://amd-pareto-handler-function25.azurewebsites.net/admin/functions/serveWebApp",
+                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/')]",
+                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/serveWebApp.dat')]",
+                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/serveWebApp",
                 "config": {},
-                "invoke_url_template": "https://amd-pareto-handler-function25.azurewebsites.net/app/{folder?}/{filename?}",
+                "invoke_url_template": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/app/{folder?}/{filename?}",
                 "language": "node",
                 "isDisabled": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
-            ],
-            "properties": {
-                "siteName": "amd-pareto-handler-function25",
-                "hostNameType": "Verified"
-            }
-        },
-        {
-            "type": "microsoft.alertsmanagement/smartdetectoralertrules",
-            "apiVersion": "2021-04-01",
-            "name": "[parameters('smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name')]",
-            "location": "global",
-            "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]",
-                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_Application_Insights_Smart_Detection_name'))]"
-            ],
-            "properties": {
-                "description": "Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.",
-                "state": "Enabled",
-                "severity": "Sev3",
-                "frequency": "PT1M",
-                "detector": {
-                    "id": "FailureAnomaliesDetector"
-                },
-                "scope": [
-                    "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
-                ],
-                "actionGroups": {
-                    "groupIds": [
-                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_Application_Insights_Smart_Detection_name'))]"
-                    ]
-                }
             }
         },
         {
