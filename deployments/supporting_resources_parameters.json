@@ -2,19 +2,10 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "IotHubs_amdparetodemoIOTHub25_connectionString": {
-            "value": null
-        },
-        "IotHubs_amdparetodemoIOTHub25_containerName": {
-            "value": null
-        },
         "namespaces_aruba19508_name": {
             "value": null
         },
         "WebPubSub_pubsub2399_name": {
-            "value": null
-        },
-        "IotHubs_amdparetodemoIOTHub25_name": {
             "value": null
         },
         "sites_amd_pareto_handler_function25_name": {
