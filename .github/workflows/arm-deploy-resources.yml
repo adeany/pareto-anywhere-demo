@@ -19,6 +19,7 @@ jobs:
     # https://github.com/marketplace/actions/deploy-azure-resource-manager-arm-template
     - name: Run ARM deploy
       uses: azure/arm-deploy@v1
+      id: deploy
       with:
         subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
         resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
