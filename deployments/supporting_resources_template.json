@@ -773,7 +773,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "[concat('$', parameters('sites_amd_pareto_handler_function25_name')s)]",
+                "publishingUsername": "[concat('$', parameters('sites_amd_pareto_handler_function25_name'))]",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
