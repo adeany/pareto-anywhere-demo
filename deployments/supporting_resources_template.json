@@ -962,7 +962,7 @@
         }
     ],
     "outputs": {
-        "iothub": {
+        "iot_hub": {
             "type": "string",
             "value": "[parameters('iot_hub_name')]"
         },
@@ -973,6 +973,10 @@
         "eventhub_namespace_name": {
             "type": "string",
             "value": "[parameters('eventhub_namespace_name')]"
+        },
+        "web_pub_sub_hub_name": {
+            "type": "string",
+            "value": "[parameters('webpubsub_name')]"
         }
     }
 }
