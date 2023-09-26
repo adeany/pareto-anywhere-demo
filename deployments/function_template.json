@@ -22,6 +22,10 @@
             "defaultValue": "amd-pareto-handler-function25",
             "type": "String"
         },
+        "actionGroups_Application_Insights_Smart_Detection_name": {
+            "defaultValue": "Application Insights Smart Detection",
+            "type": "String"
+        },
         "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
             "defaultValue": "failure anomalies - amd-pareto-handler-function25",
             "type": "String"
