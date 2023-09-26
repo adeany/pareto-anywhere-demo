@@ -18,6 +18,10 @@
             "defaultValue": "pareto-premium-plan-21281",
             "type": "String"
         },
+        "components_amd_pareto_handler_function25_name": {
+            "defaultValue": "amd-pareto-handler-function25",
+            "type": "String"
+        },
         "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
             "defaultValue": "failure anomalies - amd-pareto-handler-function25",
             "type": "String"

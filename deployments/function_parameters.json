@@ -14,6 +14,9 @@
         "serverfarms_pareto_premium_plan_21281_name": {
             "value": null
         },
+        "components_amd_pareto_handler_function25_name": {
+            "value": null
+        },
         "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
             "value": null
         }
