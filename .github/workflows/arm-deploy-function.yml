@@ -1,4 +1,4 @@
-name: Azure Pareto ARM Deployment - Resources
+name: Azure Pareto ARM Deployment - Function
 on:
   workflow_dispatch:
   
