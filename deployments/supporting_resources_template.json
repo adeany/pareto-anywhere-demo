@@ -10,7 +10,7 @@
             "defaultValue": "pubsub2399",
             "type": "String"
         },
-        "sites_amd_pareto_handler_function25_name": {
+        "components_amd_pareto_handler_function25_name": {
             "defaultValue": "amd-pareto-handler-function25",
             "type": "String"
         },
