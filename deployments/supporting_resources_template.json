@@ -596,19 +596,6 @@
                     "days": 7
                 }
             }
-        },
-        {
-            "type": "Microsoft.Storage/storageAccounts/queueServices",
-            "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
-            ],
-            "properties": {
-                "cors": {
-                    "corsRules": []
-                }
-            }
         }
     ]
 }
