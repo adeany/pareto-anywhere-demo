@@ -41,6 +41,10 @@
         "eventhub_name": {
             "defaultValue": "arubahub20067",
             "type": "String"
+        },
+        "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
+            "defaultValue": "failure anomalies - amd-pareto-handler-function25",
+            "type": "String"
         }
     },
     "variables": {},

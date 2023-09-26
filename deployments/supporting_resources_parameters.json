@@ -31,6 +31,9 @@
         },
         "eventhub_name": {
             "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
+            "value": null
         }
     }
 }
