@@ -2,10 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "region": {
+            "value": null
+        },
         "namespaces_aruba19508_name": {
             "value": null
         },
         "WebPubSub_pubsub2399_name": {
+            "value": null
+        },
+        "sites_amd_pareto_handler_function25_name": {
             "value": null
         },
         "actionGroups_Application_Insights_Smart_Detection_name": {
@@ -18,6 +24,12 @@
             "value": null
         },
         "components_amd_pareto_handler_function25_name": {
+            "value": null
+        },
+        "IotHubs_amdparetodemoIOTHub25_name": {
+            "value": null
+        },
+        "eventhub_name": {
             "value": null
         }
     }

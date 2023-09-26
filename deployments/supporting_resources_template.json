@@ -2,12 +2,24 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "region": {
+            "defaultValue": "West US",
+            "type": "String"
+        },
+        "IotHubs_amdparetodemoIOTHub25_name": {
+            "defaultValue": "amdparetodemoIOTHub25",
+            "type": "String"
+        },
         "namespaces_aruba19508_name": {
             "defaultValue": "aruba19508",
             "type": "String"
         },
         "WebPubSub_pubsub2399_name": {
             "defaultValue": "pubsub2399",
+            "type": "String"
+        },
+        "sites_amd_pareto_handler_function25_name": {
+            "defaultValue": "amd-pareto-handler-function25",
             "type": "String"
         },
         "storageAccounts_arubastorage28726_name": {
@@ -25,6 +37,10 @@
         "actionGroups_Application_Insights_Smart_Detection_name": {
             "defaultValue": "Application Insights Smart Detection",
             "type": "String"
+        },
+        "eventhub_name": {
+            "defaultValue": "arubahub20067",
+            "type": "String"
         }
     },
     "variables": {},
@@ -33,7 +49,7 @@
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
             "name": "[parameters('namespaces_aruba19508_name')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "Standard",
                 "tier": "Standard",
@@ -85,7 +101,7 @@
             "type": "microsoft.insights/components",
             "apiVersion": "2020-02-02",
             "name": "[parameters('components_amd_pareto_handler_function25_name')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "kind": "web",
             "properties": {
                 "Application_Type": "web",
@@ -99,7 +115,7 @@
             "type": "Microsoft.SignalRService/WebPubSub",
             "apiVersion": "2023-06-01-preview",
             "name": "[parameters('WebPubSub_pubsub2399_name')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "Free_F1",
                 "tier": "Free",
@@ -132,7 +148,7 @@
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2023-01-01",
             "name": "[parameters('storageAccounts_arubastorage28726_name')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -168,7 +184,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-09-01",
             "name": "[parameters('serverfarms_pareto_premium_plan_21281_name')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "EP1",
                 "tier": "ElasticPremium",
@@ -194,7 +210,7 @@
             "type": "Microsoft.EventHub/namespaces/authorizationrules",
             "apiVersion": "2023-01-01-preview",
             "name": "[concat(parameters('namespaces_aruba19508_name'), '/RootManageSharedAccessKey')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
             ],
@@ -209,8 +225,8 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/arubahub20067')]",
-            "location": "westus",
+            "name": "[concat(parameters('namespaces_aruba19508_name'), '/', parameters('eventhub_name'))]",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
             ],
@@ -228,7 +244,7 @@
             "type": "Microsoft.EventHub/namespaces/networkrulesets",
             "apiVersion": "2023-01-01-preview",
             "name": "[concat(parameters('namespaces_aruba19508_name'), '/default')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
             ],
@@ -244,7 +260,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/degradationindependencyduration')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -268,7 +284,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/degradationinserverresponsetime')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -292,7 +308,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/digestMailConfiguration')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -316,7 +332,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_billingdatavolumedailyspikeextension')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -340,7 +356,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_canaryextension')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -364,7 +380,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_exceptionchangeextension')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -388,7 +404,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_memoryleakextension')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -412,7 +428,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_securityextensionspackage')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -436,7 +452,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_traceseveritydetector')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -460,7 +476,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/longdependencyduration')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -484,7 +500,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/migrationToAlertRulesCompleted')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -508,7 +524,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/slowpageloadtime')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -532,7 +548,7 @@
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
             "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/slowserverresponsetime')]",
-            "location": "westus",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
             ],
@@ -618,6 +634,116 @@
                 "cors": {
                     "corsRules": []
                 }
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2022-09-01",
+            "name": "[parameters('sites_amd_pareto_handler_function25_name')]",
+            "location": "[parameters('region')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]"
+            ],
+            "kind": "functionapp",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.scm.azurewebsites.net')]",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": true,
+                    "functionAppScaleLimit": 0,
+                    "minimumElasticInstanceCount": 1,
+                    "appSettings": [
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "node"
+                        },
+                        {
+                            "name": "iot_hub_name",
+                            "value": "[parameters('IotHubs_amdparetodemoIOTHub25_name')]"
+                        },
+                        {
+                            "name": "EventHubConnectionString",
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('namespaces_aruba19508_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                        },
+                        {
+                            "name": "event_hub_name",
+                            "value": "[parameters('eventhub_name')]"
+                        },
+                        {
+                            "name": "EventHubSendAppSetting",
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('namespaces_aruba19508_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                        },
+                        {
+                            "name": "web_pub_sub_hub_name",
+                            "value": "[parameters('WebPubSub_pubsub2399_name')]"
+                        },
+                        {
+                            "name": "WebPubSubConnectionString",
+                            "value": "[listkeys(resourceId('Microsoft.SignalRService/WebPubSub', parameters('WebPubSub_pubsub2399_name')), '2023-06-01-preview').primaryConnectionString]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_arubastorage28726_name'), ';EndpointSuffix=core.windows.net')]"
+                        }
+                    ]
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "C3C17DD63BDEB25692A14363EB60997BA8C024C7A994CED0C4263682EDAC3EFB",
+                "containerSize": 1536,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2022-09-01",
+            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/ftp')]",
+            "location": "[parameters('region')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+            ],
+            "properties": {
+                "allow": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
+            "apiVersion": "2022-09-01",
+            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/scm')]",
+            "location": "[parameters('region')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+            ],
+            "properties": {
+                "allow": false
             }
         }
     ]

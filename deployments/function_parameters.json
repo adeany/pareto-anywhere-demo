@@ -11,7 +11,10 @@
         "storageAccounts_arubastorage28726_name": {
             "value": null
         },
-        "serverfarms_pareto_premium_plan_21281_name": {
+        "components_amd_pareto_handler_function25_name": {
+            "value": null
+        },
+        "actionGroups_Application_Insights_Smart_Detection_name": {
             "value": null
         },
         "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {

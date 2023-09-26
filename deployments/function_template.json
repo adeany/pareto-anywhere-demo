@@ -14,8 +14,12 @@
             "defaultValue": "arubastorage28726",
             "type": "String"
         },
-        "serverfarms_pareto_premium_plan_21281_name": {
-            "defaultValue": "pareto-premium-plan-21281",
+        "components_amd_pareto_handler_function25_name": {
+            "defaultValue": "amd-pareto-handler-function25",
+            "type": "String"
+        },
+        "actionGroups_Application_Insights_Smart_Detection_name": {
+            "defaultValue": "Application Insights Smart Detection",
             "type": "String"
         },
         "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
@@ -26,86 +30,10 @@
     "variables": {},
     "resources": [
         {
-            "type": "Microsoft.Web/sites",
-            "apiVersion": "2022-09-01",
-            "name": "[parameters('sites_amd_pareto_handler_function25_name')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]"
-            ],
-            "kind": "functionapp",
-            "properties": {
-                "enabled": true,
-                "hostNameSslStates": [
-                    {
-                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.scm.azurewebsites.net')]",
-                        "sslState": "Disabled",
-                        "hostType": "Repository"
-                    }
-                ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]",
-                "reserved": false,
-                "isXenon": false,
-                "hyperV": false,
-                "vnetRouteAllEnabled": false,
-                "vnetImagePullEnabled": false,
-                "vnetContentShareEnabled": false,
-                "siteConfig": {
-                    "numberOfWorkers": 1,
-                    "acrUseManagedIdentityCreds": false,
-                    "alwaysOn": false,
-                    "http20Enabled": true,
-                    "functionAppScaleLimit": 0,
-                    "minimumElasticInstanceCount": 1
-                },
-                "scmSiteAlsoStopped": false,
-                "clientAffinityEnabled": false,
-                "clientCertEnabled": false,
-                "clientCertMode": "Required",
-                "hostNamesDisabled": false,
-                "customDomainVerificationId": "C3C17DD63BDEB25692A14363EB60997BA8C024C7A994CED0C4263682EDAC3EFB",
-                "containerSize": 1536,
-                "dailyMemoryTimeQuota": 0,
-                "httpsOnly": false,
-                "redundancyMode": "None",
-                "storageAccountRequired": false,
-                "keyVaultReferenceIdentity": "SystemAssigned"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
-            "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/ftp')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
-            ],
-            "properties": {
-                "allow": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
-            "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/scm')]",
-            "location": "West US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
-            ],
-            "properties": {
-                "allow": false
-            }
-        },
-        {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-09-01",
             "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/web')]",
-            "location": "West US",
+            "location": "[parameters('region')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
             ],
