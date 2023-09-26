@@ -28,6 +28,7 @@ jobs:
 
     # output variables from template
     - name: Print the outputs
+      shell: bash
       run: |
         echo "iot hub name = " ${{ steps.deploy.outputs.iot_hub }}
         echo "event hub name = " ${{ steps.deploy.outputs.event_hub_name }}
