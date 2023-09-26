@@ -5,34 +5,34 @@
         "region": {
             "value": null
         },
-        "namespaces_aruba19508_name": {
+        "eventhub_namespace_name": {
             "value": null
         },
-        "WebPubSub_pubsub2399_name": {
+        "webpubsub_name": {
             "value": null
         },
-        "sites_amd_pareto_handler_function25_name": {
+        "sites_name": {
             "value": null
         },
-        "actionGroups_Application_Insights_Smart_Detection_name": {
+        "actiongroups_name": {
             "value": null
         },
-        "storageAccounts_arubastorage28726_name": {
+        "storage_account_name": {
             "value": null
         },
-        "serverfarms_pareto_premium_plan_21281_name": {
+        "serverfarms_name": {
             "value": null
         },
-        "components_amd_pareto_handler_function25_name": {
+        "function_components_name": {
             "value": null
         },
-        "IotHubs_amdparetodemoIOTHub25_name": {
+        "iot_hub_name": {
             "value": null
         },
         "eventhub_name": {
             "value": null
         },
-        "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
+        "smartdetectoralertrules_name": {
             "value": null
         }
     }

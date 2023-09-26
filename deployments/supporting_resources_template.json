@@ -6,35 +6,35 @@
             "defaultValue": "West US",
             "type": "String"
         },
-        "IotHubs_amdparetodemoIOTHub25_name": {
+        "iot_hub_name": {
             "defaultValue": "amdparetodemoIOTHub25",
             "type": "String"
         },
-        "namespaces_aruba19508_name": {
+        "eventhub_namespace_name": {
             "defaultValue": "aruba19508",
             "type": "String"
         },
-        "WebPubSub_pubsub2399_name": {
+        "webpubsub_name": {
             "defaultValue": "pubsub2399",
             "type": "String"
         },
-        "sites_amd_pareto_handler_function25_name": {
+        "sites_name": {
             "defaultValue": "amd-pareto-handler-function25",
             "type": "String"
         },
-        "storageAccounts_arubastorage28726_name": {
+        "storage_account_name": {
             "defaultValue": "arubastorage28726",
             "type": "String"
         },
-        "serverfarms_pareto_premium_plan_21281_name": {
+        "serverfarms_name": {
             "defaultValue": "pareto-premium-plan-21281",
             "type": "String"
         },
-        "components_amd_pareto_handler_function25_name": {
+        "function_components_name": {
             "defaultValue": "amd-pareto-handler-function25",
             "type": "String"
         },
-        "actionGroups_Application_Insights_Smart_Detection_name": {
+        "actiongroups_name": {
             "defaultValue": "Application Insights Smart Detection",
             "type": "String"
         },
@@ -42,7 +42,7 @@
             "defaultValue": "arubahub20067",
             "type": "String"
         },
-        "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
+        "smartdetectoralertrules_name": {
             "defaultValue": "failure anomalies - amd-pareto-handler-function25",
             "type": "String"
         }
@@ -52,7 +52,7 @@
         {
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
-            "name": "[parameters('namespaces_aruba19508_name')]",
+            "name": "[parameters('eventhub_namespace_name')]",
             "location": "[parameters('region')]",
             "sku": {
                 "name": "Standard",
@@ -72,7 +72,7 @@
         {
             "type": "microsoft.insights/actionGroups",
             "apiVersion": "2023-01-01",
-            "name": "[parameters('actionGroups_Application_Insights_Smart_Detection_name')]",
+            "name": "[parameters('actiongroups_name')]",
             "location": "Global",
             "properties": {
                 "groupShortName": "SmartDetect",
@@ -104,7 +104,7 @@
         {
             "type": "microsoft.insights/components",
             "apiVersion": "2020-02-02",
-            "name": "[parameters('components_amd_pareto_handler_function25_name')]",
+            "name": "[parameters('function_components_name')]",
             "location": "[parameters('region')]",
             "kind": "web",
             "properties": {
@@ -118,7 +118,7 @@
         {
             "type": "Microsoft.SignalRService/WebPubSub",
             "apiVersion": "2023-06-01-preview",
-            "name": "[parameters('WebPubSub_pubsub2399_name')]",
+            "name": "[parameters('webpubsub_name')]",
             "location": "[parameters('region')]",
             "sku": {
                 "name": "Free_F1",
@@ -151,7 +151,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2023-01-01",
-            "name": "[parameters('storageAccounts_arubastorage28726_name')]",
+            "name": "[parameters('storage_account_name')]",
             "location": "[parameters('region')]",
             "sku": {
                 "name": "Standard_LRS",
@@ -187,7 +187,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-09-01",
-            "name": "[parameters('serverfarms_pareto_premium_plan_21281_name')]",
+            "name": "[parameters('serverfarms_name')]",
             "location": "[parameters('region')]",
             "sku": {
                 "name": "EP1",
@@ -213,10 +213,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/RootManageSharedAccessKey')]",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/RootManageSharedAccessKey')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
             ],
             "properties": {
                 "rights": [
@@ -229,10 +229,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/', parameters('eventhub_name'))]",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'))]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
             ],
             "properties": {
                 "retentionDescription": {
@@ -247,10 +247,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/networkrulesets",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/default')]",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/default')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
             ],
             "properties": {
                 "publicNetworkAccess": "Enabled",
@@ -263,10 +263,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/degradationindependencyduration')]",
+            "name": "[concat(parameters('function_components_name'), '/degradationindependencyduration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -287,10 +287,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/degradationinserverresponsetime')]",
+            "name": "[concat(parameters('function_components_name'), '/degradationinserverresponsetime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -311,10 +311,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/digestMailConfiguration')]",
+            "name": "[concat(parameters('function_components_name'), '/digestMailConfiguration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -335,10 +335,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_billingdatavolumedailyspikeextension')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_billingdatavolumedailyspikeextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -359,10 +359,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_canaryextension')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_canaryextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -383,10 +383,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_exceptionchangeextension')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_exceptionchangeextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -407,10 +407,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_memoryleakextension')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_memoryleakextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -431,10 +431,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_securityextensionspackage')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_securityextensionspackage')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -455,10 +455,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/extension_traceseveritydetector')]",
+            "name": "[concat(parameters('function_components_name'), '/extension_traceseveritydetector')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -479,10 +479,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/longdependencyduration')]",
+            "name": "[concat(parameters('function_components_name'), '/longdependencyduration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -503,10 +503,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/migrationToAlertRulesCompleted')]",
+            "name": "[concat(parameters('function_components_name'), '/migrationToAlertRulesCompleted')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -527,10 +527,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/slowpageloadtime')]",
+            "name": "[concat(parameters('function_components_name'), '/slowpageloadtime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -551,10 +551,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('components_amd_pareto_handler_function25_name'), '/slowserverresponsetime')]",
+            "name": "[concat(parameters('function_components_name'), '/slowserverresponsetime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -575,9 +575,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default')]",
+            "name": "[concat(parameters('storage_account_name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -596,9 +596,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default')]",
+            "name": "[concat(parameters('storage_account_name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -617,9 +617,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/queueServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default')]",
+            "name": "[concat(parameters('storage_account_name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "cors": {
@@ -630,9 +630,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/tableServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default')]",
+            "name": "[concat(parameters('storage_account_name'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "cors": {
@@ -643,27 +643,27 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-09-01",
-            "name": "[parameters('sites_amd_pareto_handler_function25_name')]",
+            "name": "[parameters('sites_name')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_name'))]"
             ],
             "kind": "functionapp",
             "properties": {
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_name'), '.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('sites_name'), '.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_pareto_premium_plan_21281_name'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_name'))]",
                 "reserved": false,
                 "isXenon": false,
                 "hyperV": false,
@@ -684,11 +684,11 @@
                         },
                         {
                             "name": "iot_hub_name",
-                            "value": "[parameters('IotHubs_amdparetodemoIOTHub25_name')]"
+                            "value": "[parameters('iot_hub_name')]"
                         },
                         {
                             "name": "EventHubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('namespaces_aruba19508_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhub_namespace_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "event_hub_name",
@@ -696,19 +696,19 @@
                         },
                         {
                             "name": "EventHubSendAppSetting",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('namespaces_aruba19508_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhub_namespace_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "web_pub_sub_hub_name",
-                            "value": "[parameters('WebPubSub_pubsub2399_name')]"
+                            "value": "[parameters('webpubsub_name')]"
                         },
                         {
                             "name": "WebPubSubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.SignalRService/WebPubSub', parameters('WebPubSub_pubsub2399_name')), '2023-06-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.SignalRService/WebPubSub', parameters('webpubsub_name')), '2023-06-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccounts_arubastorage28726_name'), ';EndpointSuffix=core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storage_account_name'), ';EndpointSuffix=core.windows.net')]"
                         }
                     ]
                 },
@@ -729,10 +729,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/ftp')]",
+            "name": "[concat(parameters('sites_name'), '/ftp')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
                 "allow": false
@@ -741,10 +741,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/scm')]",
+            "name": "[concat(parameters('sites_name'), '/scm')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
                 "allow": false
@@ -753,10 +753,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/web')]",
+            "name": "[concat(parameters('sites_name'), '/web')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -777,7 +777,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "[concat('$', parameters('sites_amd_pareto_handler_function25_name'))]",
+                "publishingUsername": "[concat('$', parameters('sites_name'))]",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
@@ -831,24 +831,24 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net')]",
+            "name": "[concat(parameters('sites_name'), '/', parameters('sites_name'), '.azurewebsites.net')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
-                "siteName": "[parameters('sites_amd_pareto_handler_function25_name')]",
+                "siteName": "[parameters('sites_name')]",
                 "hostNameType": "Verified"
             }
         },
         {
             "type": "microsoft.alertsmanagement/smartdetectoralertrules",
             "apiVersion": "2021-04-01",
-            "name": "[parameters('smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name')]",
+            "name": "[parameters('smartdetectoralertrules_name')]",
             "location": "global",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]",
-                "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_Application_Insights_Smart_Detection_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]",
+                "[resourceId('microsoft.insights/actionGroups', parameters('actiongroups_name'))]"
             ],
             "properties": {
                 "description": "Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.",
@@ -859,11 +859,11 @@
                     "id": "FailureAnomaliesDetector"
                 },
                 "scope": [
-                    "[resourceId('microsoft.insights/components', parameters('components_amd_pareto_handler_function25_name'))]"
+                    "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
                 ],
                 "actionGroups": {
                     "groupIds": [
-                        "[resourceId('microsoft.insights/actionGroups', parameters('actionGroups_Application_Insights_Smart_Detection_name'))]"
+                        "[resourceId('microsoft.insights/actionGroups', parameters('actiongroups_name'))]"
                     ]
                 }
             }
@@ -871,11 +871,11 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/', parameters('eventhub_name'), '/aruba-hub-rule')]",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'), '/aruba-hub-rule')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_aruba19508_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhub_namespace_name'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
             ],
             "properties": {
                 "rights": [
@@ -887,21 +887,21 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/', parameters('eventhub_name'), '/$Default')]",
+            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'), '/$Default')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_aruba19508_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhub_namespace_name'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
             ],
             "properties": {}
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default/azure-webjobs-eventhub')]",
+            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-eventhub')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_arubastorage28726_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -915,10 +915,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default/azure-webjobs-hosts')]",
+            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-hosts')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_arubastorage28726_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -932,10 +932,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default/azure-webjobs-secrets')]",
+            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-secrets')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_arubastorage28726_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -949,10 +949,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
+            "name": "[concat(parameters('storage_account_name'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccounts_arubastorage28726_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_arubastorage28726_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storage_account_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
             ],
             "properties": {
                 "accessTier": "TransactionOptimized",
@@ -960,5 +960,19 @@
                 "enabledProtocols": "SMB"
             }
         }
-    ]
+    ],
+    "outputs": {
+        "iot_hub_name": {
+            "type": "string",
+            "value": "[parameters('iot_hub_name')]"
+        },
+        "event_hub_name": {
+            "type": "string",
+            "value": "[parameters('eventhub_name')]"
+        },
+        "eventhub_namespace_name": {
+            "type": "string",
+            "value": "[parameters('eventhub_namespace_name')]"
+        }
+    }
 }

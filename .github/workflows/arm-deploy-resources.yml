@@ -30,4 +30,4 @@ jobs:
         parameters: ./deployments/supporting_resources_parameters.json
 
     # output FOO variable from template
-    - run: echo ${{ steps.deploy.outputs.FOO }}
+    - run: echo ${{ steps.deploy.outputs.iot_hub_name }}
