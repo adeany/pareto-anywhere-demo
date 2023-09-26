@@ -962,7 +962,7 @@
         }
     ],
     "outputs": {
-        "iothub": {
+        "iot_hub": {
             "type": "string",
             "value": "[parameters('iot_hub_name')]"
         },
