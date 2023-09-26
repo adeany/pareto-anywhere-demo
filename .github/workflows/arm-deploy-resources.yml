@@ -31,3 +31,4 @@ jobs:
       run: |
         echo "iot hub name = " ${{ steps.deploy.outputs.iot_hub }}
         echo "event hub name = " ${{ steps.deploy.outputs.event_hub_name }}
+        echo "webpubsub name = " ${{ steps.deploy.outputs.web_pub_sub_name }}

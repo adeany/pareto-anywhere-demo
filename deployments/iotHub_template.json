@@ -2,13 +2,17 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "IotHubs_amdparetodemoIOTHub25_connectionString": {
+        "region": {
+            "defaultValue": "West US",
+            "type": "String"
+        },
+        "iot_hub_connectionstring": {
             "type": "SecureString"
         },
-        "IotHubs_amdparetodemoIOTHub25_containerName": {
+        "iot_hub_containername": {
             "type": "SecureString"
         },
-        "IotHubs_amdparetodemoIOTHub25_name": {
+        "iot_hub_name": {
             "defaultValue": "amdparetodemoIOTHub25",
             "type": "String"
         }
@@ -18,8 +22,8 @@
         {
             "type": "Microsoft.Devices/IotHubs",
             "apiVersion": "2023-06-30",
-            "name": "[parameters('IotHubs_amdparetodemoIOTHub25_name')]",
-            "location": "westus",
+            "name": "[parameters('iot_hub_name')]",
+            "location": "[parameters('region')]",
             "sku": {
                 "name": "F1",
                 "tier": "Free",
@@ -58,8 +62,8 @@
                 "storageEndpoints": {
                     "$default": {
                         "sasTtlAsIso8601": "PT1H",
-                        "connectionString": "[parameters('IotHubs_amdparetodemoIOTHub25_connectionString')]",
-                        "containerName": "[parameters('IotHubs_amdparetodemoIOTHub25_containerName')]"
+                        "connectionString": "[parameters('iot_hub_connectionstring')]",
+                        "containerName": "[parameters('iot_hub_containername')]"
                     }
                 },
                 "messagingEndpoints": {
@@ -83,5 +87,11 @@
                 "allowedFqdnList": []
             }
         }
-    ]
+    ],
+    "outputs": {
+        "iot_hub_name": {
+            "type": "string",
+            "value": "[parameters('iot_hub_name')]"
+        }
+    }
 }

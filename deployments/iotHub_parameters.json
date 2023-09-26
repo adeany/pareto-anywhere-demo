@@ -2,13 +2,16 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "IotHubs_amdparetodemoIOTHub25_connectionString": {
+        "region": {
             "value": null
         },
-        "IotHubs_amdparetodemoIOTHub25_containerName": {
+        "iot_hub_connectionstring": {
             "value": null
         },
-        "IotHubs_amdparetodemoIOTHub25_name": {
+        "iot_hub_containername": {
+            "value": null
+        },
+        "iot_hub_name": {
             "value": null
         }
     }

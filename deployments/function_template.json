@@ -2,8 +2,12 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "sites_amd_pareto_handler_function25_name": {
+        "sites_name": {
             "defaultValue": "amd-pareto-handler-function25",
+            "type": "String"
+        },
+        "region": {
+            "defaultValue": "West US",
             "type": "String"
         }
     },
@@ -12,19 +16,19 @@
         {
             "type": "Microsoft.Web/sites/functions",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/negotiateConnection')]",
-            "location": "West US",
+            "name": "[concat(parameters('sites_name'), '/negotiateConnection')]",
+            "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/')]",
-                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/index.js')]",
-                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/function.json')]",
-                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/negotiateConnection.dat')]",
-                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/negotiateConnection')]",
+                "script_root_path_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/')]",
+                "script_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/negotiateConnection/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/negotiateConnection.dat')]",
+                "href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/functions/negotiateConnection')]",
                 "config": {},
-                "invoke_url_template": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/app/wsconnection')]",
+                "invoke_url_template": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/app/wsconnection')]",
                 "language": "node",
                 "isDisabled": false
             }
@@ -32,17 +36,17 @@
         {
             "type": "Microsoft.Web/sites/functions",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/processIoTHubMessages')]",
-            "location": "West US",
+            "name": "[concat(parameters('sites_name'), '/processIoTHubMessages')]",
+            "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/')]",
-                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/index.js')]",
-                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/function.json')]",
-                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/processIoTHubMessages.dat')]",
-                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/processIoTHubMessages')]",
+                "script_root_path_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/')]",
+                "script_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/processIoTHubMessages/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/processIoTHubMessages.dat')]",
+                "href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/functions/processIoTHubMessages')]",
                 "config": {},
                 "language": "node",
                 "isDisabled": false
@@ -51,19 +55,19 @@
         {
             "type": "Microsoft.Web/sites/functions",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_amd_pareto_handler_function25_name'), '/serveWebApp')]",
-            "location": "West US",
+            "name": "[concat(parameters('sites_name'), '/serveWebApp')]",
+            "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_amd_pareto_handler_function25_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
             ],
             "properties": {
-                "script_root_path_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/')]",
-                "script_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/index.js')]",
-                "config_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/function.json')]",
-                "test_data_href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/serveWebApp.dat')]",
-                "href": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/admin/functions/serveWebApp",
+                "script_root_path_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/')]",
+                "script_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/index.js')]",
+                "config_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/site/wwwroot/serveWebApp/function.json')]",
+                "test_data_href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/vfs/data/Functions/sampledata/serveWebApp.dat')]",
+                "href": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/admin/functions/serveWebApp",
                 "config": {},
-                "invoke_url_template": "[concat('https://', parameters('sites_amd_pareto_handler_function25_name'), '.azurewebsites.net/app/{folder?}/{filename?}",
+                "invoke_url_template": "[concat('https://', parameters('sites_name'), '.azurewebsites.net/app/{folder?}/{filename?}",
                 "language": "node",
                 "isDisabled": false
             }
