@@ -40,7 +40,7 @@
                 "maximumThroughputUnits": 0,
                 "kafkaEnabled": true
             }
-        }
+        },
         {
             "type": "microsoft.insights/actionGroups",
             "apiVersion": "2023-01-01",
