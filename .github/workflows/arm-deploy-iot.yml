@@ -27,7 +27,7 @@ jobs:
         subscriptionId: ${{ secrets.SUBSCRIPTION_ID }}
         resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
         template: ./deployments/iotHub_template.json
-        parameters: ./deployments/parameters.json
+        parameters: ./deployments/iotHub_parameters.json
 
     # output FOO variable from template
     - run: echo ${{ steps.deploy.outputs.FOO }}
