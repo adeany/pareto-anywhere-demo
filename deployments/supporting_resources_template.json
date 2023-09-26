@@ -3,48 +3,37 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "region": {
-            "defaultValue": "West US",
-            "type": "String"
+            "type": "string"
         },
         "iot_hub_name": {
-            "defaultValue": "amdparetodemoIOTHub25",
-            "type": "String"
+            "type": "string"
         },
         "eventhub_namespace_name": {
-            "defaultValue": "aruba19508",
-            "type": "String"
+            "type": "string"
         },
         "webpubsub_name": {
-            "defaultValue": "pubsub2399",
-            "type": "String"
+            "type": "string"
         },
         "sites_name": {
-            "defaultValue": "amd-pareto-handler-function25",
-            "type": "String"
+            "type": "string"
         },
         "storage_account_name": {
-            "defaultValue": "arubastorage28726",
-            "type": "String"
+            "type": "string"
         },
         "serverfarms_name": {
-            "defaultValue": "pareto-premium-plan-21281",
-            "type": "String"
+            "type": "string"
         },
         "function_components_name": {
-            "defaultValue": "amd-pareto-handler-function25",
-            "type": "String"
+            "type": "string"
         },
         "actiongroups_name": {
-            "defaultValue": "Application Insights Smart Detection",
-            "type": "String"
+            "type": "string"
         },
         "eventhub_name": {
-            "defaultValue": "arubahub20067",
-            "type": "String"
+            "type": "string"
         },
         "smartdetectoralertrules_name": {
-            "defaultValue": "failure anomalies - amd-pareto-handler-function25",
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
@@ -974,7 +963,7 @@
             "type": "string",
             "value": "[parameters('eventhub_namespace_name')]"
         },
-        "web_pub_sub_hub_name": {
+        "web_pub_sub_name": {
             "type": "string",
             "value": "[parameters('webpubsub_name')]"
         }
