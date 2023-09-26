@@ -89,33 +89,6 @@
             }
         },
         {
-            "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationrules",
-            "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/arubahub20067/aruba-hub-rule')]",
-            "location": "westus",
-            "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_aruba19508_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
-            ],
-            "properties": {
-                "rights": [
-                    "Listen",
-                    "Send"
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
-            "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('namespaces_aruba19508_name'), '/arubahub20067/$Default')]",
-            "location": "westus",
-            "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('namespaces_aruba19508_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('namespaces_aruba19508_name'))]"
-            ],
-            "properties": {}
-        },
-        {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
             "name": "[concat(parameters('storageAccounts_arubastorage28726_name'), '/default/azure-webjobs-eventhub')]",
