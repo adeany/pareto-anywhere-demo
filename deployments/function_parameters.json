@@ -5,10 +5,7 @@
         "namespaces_aruba19508_name": {
             "value": null
         },
-        "WebPubSub_pubsub2399_name": {
-            "value": null
-        },
-        "actionGroups_Application_Insights_Smart_Detection_name": {
+        "sites_amd_pareto_handler_function25_name": {
             "value": null
         },
         "storageAccounts_arubastorage28726_name": {
@@ -17,7 +14,7 @@
         "serverfarms_pareto_premium_plan_21281_name": {
             "value": null
         },
-        "components_amd_pareto_handler_function25_name": {
+        "smartdetectoralertrules_failure_anomalies___amd_pareto_handler_function25_name": {
             "value": null
         }
     }
