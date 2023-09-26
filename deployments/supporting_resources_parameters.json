@@ -8,10 +8,16 @@
         "WebPubSub_pubsub2399_name": {
             "value": null
         },
-        "components_amd_pareto_handler_function25_name": {
+        "actionGroups_Application_Insights_Smart_Detection_name": {
             "value": null
         },
-        "actionGroups_Application_Insights_Smart_Detection_name": {
+        "storageAccounts_arubastorage28726_name": {
+            "value": null
+        },
+        "serverfarms_pareto_premium_plan_21281_name": {
+            "value": null
+        },
+        "components_amd_pareto_handler_function25_name": {
             "value": null
         }
     }
