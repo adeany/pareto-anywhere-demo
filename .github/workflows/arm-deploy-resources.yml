@@ -27,4 +27,4 @@ jobs:
 
     # output variables from template
     - name: Print the outputs
-      run: echo ${{ steps.deploy.outputs.iot_hub_name }}
+      run: echo ${{ steps.deploy.outputs.iothub }}
