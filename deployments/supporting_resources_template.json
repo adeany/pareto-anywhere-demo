@@ -300,7 +300,7 @@
                             "value": "[parameters('functionName')]" 
                         },
                         {
-                            "name": "iotHubName",
+                            "name": "iot_hub_name",
                             "value": "[parameters('iotHubName')]"
                         },
                         {
@@ -325,7 +325,11 @@
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2015-05-01-preview').key1)]"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~4"
                         }
                     ]
                 }
@@ -335,7 +339,7 @@
                     "name": "MSDeploy",
                     "type": "Extensions",
                     "location": "[resourceGroup().location]",
-                    "apiVersion": "2015-08-01",
+                    "apiVersion": "2021-02-01",
                     "dependsOn": [
                         "[concat('Microsoft.Web/sites/', parameters('functionName'))]"
                     ],
