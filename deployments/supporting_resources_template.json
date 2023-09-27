@@ -3,40 +3,39 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "region": {
+            "defaultValue": "West US",
             "type": "string"
         },
         "iot_hub_name": {
+            "defaultValue": "pareto-anywhere-iot-hub",
             "type": "string"
         },
         "eventhub_namespace_name": {
-            "type": "string"
-        },
-        "webpubsub_name": {
-            "type": "string"
-        },
-        "sites_name": {
-            "type": "string"
-        },
-        "storage_account_name": {
-            "type": "string"
-        },
-        "serverfarms_name": {
-            "type": "string"
-        },
-        "function_components_name": {
-            "type": "string"
-        },
-        "actiongroups_name": {
+            "defaultValue": "pareto-anywhere-events",
             "type": "string"
         },
         "eventhub_name": {
+            "defaultValue": "pareto-anywhere-event-hub",
             "type": "string"
         },
-        "smartdetectoralertrules_name": {
+        "webpubsub_name": {
+            "defaultValue": "pareto-anywhere-wps",
+            "type": "string"
+        },
+        "storage_account_name": {
+            "defaultValue": "paretoanywherestorage",
+            "type": "string"
+        },
+        "function_name": {
+            "defaultValue": "pareto-anywhere",
             "type": "string"
         }
     },
-    "variables": {},
+    "variables": {
+        "actiongroups_name": "Application Insights Smart Detection",
+        "serverfarms_name": "pareto-anywhere-iot-hub",
+        "smartdetectoralertrules_name": "failure anomalies - pareto-anywhere"
+    },
     "resources": [
         {
             "type": "Microsoft.EventHub/namespaces",
@@ -61,7 +60,7 @@
         {
             "type": "microsoft.insights/actionGroups",
             "apiVersion": "2023-01-01",
-            "name": "[parameters('actiongroups_name')]",
+            "name": "[variables('actiongroups_name')]",
             "location": "Global",
             "properties": {
                 "groupShortName": "SmartDetect",
@@ -93,7 +92,7 @@
         {
             "type": "microsoft.insights/components",
             "apiVersion": "2020-02-02",
-            "name": "[parameters('function_components_name')]",
+            "name": "[parameters('function_name')]",
             "location": "[parameters('region')]",
             "kind": "web",
             "properties": {
@@ -176,7 +175,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-09-01",
-            "name": "[parameters('serverfarms_name')]",
+            "name": "[variables('serverfarms_name')]",
             "location": "[parameters('region')]",
             "sku": {
                 "name": "EP1",
@@ -252,10 +251,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/degradationindependencyduration')]",
+            "name": "[concat(parameters('function_name'), '/degradationindependencyduration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -276,10 +275,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/degradationinserverresponsetime')]",
+            "name": "[concat(parameters('function_name'), '/degradationinserverresponsetime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -300,10 +299,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/digestMailConfiguration')]",
+            "name": "[concat(parameters('function_name'), '/digestMailConfiguration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -324,10 +323,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_billingdatavolumedailyspikeextension')]",
+            "name": "[concat(parameters('function_name'), '/extension_billingdatavolumedailyspikeextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -348,10 +347,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_canaryextension')]",
+            "name": "[concat(parameters('function_name'), '/extension_canaryextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -372,10 +371,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_exceptionchangeextension')]",
+            "name": "[concat(parameters('function_name'), '/extension_exceptionchangeextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -396,10 +395,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_memoryleakextension')]",
+            "name": "[concat(parameters('function_name'), '/extension_memoryleakextension')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -420,10 +419,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_securityextensionspackage')]",
+            "name": "[concat(parameters('function_name'), '/extension_securityextensionspackage')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -444,10 +443,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/extension_traceseveritydetector')]",
+            "name": "[concat(parameters('function_name'), '/extension_traceseveritydetector')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -468,10 +467,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/longdependencyduration')]",
+            "name": "[concat(parameters('function_name'), '/longdependencyduration')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -492,10 +491,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/migrationToAlertRulesCompleted')]",
+            "name": "[concat(parameters('function_name'), '/migrationToAlertRulesCompleted')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -516,10 +515,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/slowpageloadtime')]",
+            "name": "[concat(parameters('function_name'), '/slowpageloadtime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -540,10 +539,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_components_name'), '/slowserverresponsetime')]",
+            "name": "[concat(parameters('function_name'), '/slowserverresponsetime')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -632,27 +631,27 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-09-01",
-            "name": "[parameters('sites_name')]",
+            "name": "[parameters('function_name')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_name'))]"
+                "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_name'))]"
             ],
             "kind": "functionapp",
             "properties": {
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('sites_name'), '.azurewebsites.net')]",
+                        "name": "[concat(parameters('function_name'), '.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('sites_name'), '.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('function_name'), '.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_name'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_name'))]",
                 "reserved": false,
                 "isXenon": false,
                 "hyperV": false,
@@ -718,10 +717,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_name'), '/ftp')]",
+            "name": "[concat(parameters('function_name'), '/ftp')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
             ],
             "properties": {
                 "allow": false
@@ -730,10 +729,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_name'), '/scm')]",
+            "name": "[concat(parameters('function_name'), '/scm')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
             ],
             "properties": {
                 "allow": false
@@ -742,10 +741,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_name'), '/web')]",
+            "name": "[concat(parameters('function_name'), '/web')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -766,7 +765,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "[concat('$', parameters('sites_name'))]",
+                "publishingUsername": "[concat('$', parameters('function_name'))]",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
@@ -820,24 +819,24 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('sites_name'), '/', parameters('sites_name'), '.azurewebsites.net')]",
+            "name": "[concat(parameters('function_name'), '/', parameters('function_name'), '.azurewebsites.net')]",
             "location": "[parameters('region')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('sites_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
             ],
             "properties": {
-                "siteName": "[parameters('sites_name')]",
+                "siteName": "[parameters('function_name')]",
                 "hostNameType": "Verified"
             }
         },
         {
             "type": "microsoft.alertsmanagement/smartdetectoralertrules",
             "apiVersion": "2021-04-01",
-            "name": "[parameters('smartdetectoralertrules_name')]",
+            "name": "[variables('smartdetectoralertrules_name')]",
             "location": "global",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_components_name'))]",
-                "[resourceId('microsoft.insights/actionGroups', parameters('actiongroups_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('function_name'))]",
+                "[resourceId('microsoft.insights/actionGroups', variables('actiongroups_name'))]"
             ],
             "properties": {
                 "description": "Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.",
@@ -848,11 +847,11 @@
                     "id": "FailureAnomaliesDetector"
                 },
                 "scope": [
-                    "[resourceId('microsoft.insights/components', parameters('function_components_name'))]"
+                    "[resourceId('microsoft.insights/components', parameters('function_name'))]"
                 ],
                 "actionGroups": {
                     "groupIds": [
-                        "[resourceId('microsoft.insights/actionGroups', parameters('actiongroups_name'))]"
+                        "[resourceId('microsoft.insights/actionGroups', variables('actiongroups_name'))]"
                     ]
                 }
             }

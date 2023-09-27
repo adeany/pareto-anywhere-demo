@@ -3,37 +3,25 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "region": {
-            "value": "West US"
+            "value": null
         },
         "eventhub_namespace_name": {
-            "value":  "aruba19508"
+            "value":  null
         },
         "webpubsub_name": {
-            "value": "pubsub2399"
-        },
-        "sites_name": {
-            "value": "amd-pareto-handler-function25"
-        },
-        "actiongroups_name": {
-            "value": "Application Insights Smart Detection"
+            "value": null
         },
         "storage_account_name": {
-            "value": "arubastorage28726"
+            "value": null
         },
-        "serverfarms_name": {
-            "value": "pareto-premium-plan-21281"
-        },
-        "function_components_name": {
-            "value": "amd-pareto-handler-function25"
+        "function_name": {
+            "value": null
         },
         "iot_hub_name": {
-            "value": "amdparetodemoIOTHub25"
+            "value": null
         },
         "eventhub_name": {
-            "value": "arubahub20067"
-        },
-        "smartdetectoralertrules_name": {
-            "value": "failure anomalies - amd-pareto-handler-function25"
+            "value": null
         }
     }
 }

@@ -4,17 +4,11 @@
     "parameters": {
         "region": {
             "defaultValue": "West US",
-            "type": "String"
-        },
-        "iot_hub_connectionstring": {
-            "type": "SecureString"
-        },
-        "iot_hub_containername": {
-            "type": "SecureString"
+            "type": "string"
         },
         "iot_hub_name": {
             "defaultValue": "amdparetodemoIOTHub25",
-            "type": "String"
+            "type": "string"
         }
     },
     "variables": {},
@@ -59,13 +53,7 @@
                         "isEnabled": true
                     }
                 },
-                "storageEndpoints": {
-                    "$default": {
-                        "sasTtlAsIso8601": "PT1H",
-                        "connectionString": "[parameters('iot_hub_connectionstring')]",
-                        "containerName": "[parameters('iot_hub_containername')]"
-                    }
-                },
+                "storageEndpoints": {},
                 "messagingEndpoints": {
                     "fileNotifications": {
                         "lockDurationAsIso8601": "PT5S",
