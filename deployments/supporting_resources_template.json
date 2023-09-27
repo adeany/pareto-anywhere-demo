@@ -284,6 +284,14 @@
                             "value": "node"
                         },
                         {
+                            "name": "WEBSITE_RUN_FROM_PACKAGE",
+                            "value": 1
+                        },
+                        {
+                            "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                            "value": "~18"
+                        },
+                        {
                             "name": "iotHubName",
                             "value": "[parameters('iotHubName')]"
                         },
