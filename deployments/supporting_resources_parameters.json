@@ -2,13 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "eventhubNamespaceName": {
+        "eventHubNamespaceName": {
             "value":  "aruba19508"
         },
         "webPubSubName": {
             "value": "pubsub2399"
         },
-        "storageName": {
+        "storageAccountName": {
             "value": "arubastorage87262"
         },
         "functionName": {
@@ -17,7 +17,7 @@
         "iotHubName": {
             "value": "amdparetodemoIOTHub25"
         },
-        "eventhubName": {
+        "eventHubName": {
             "value": "arubahub20067"
         }
     }

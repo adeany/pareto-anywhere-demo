@@ -6,11 +6,11 @@
             "defaultValue": "pareto-anywhere-iot-hub",
             "type": "string"
         },
-        "eventhubNamespaceName": {
+        "eventHubNamespaceName": {
             "defaultValue": "pareto-anywhere-events",
             "type": "string"
         },
-        "eventhubName": {
+        "eventHubName": {
             "defaultValue": "pareto-anywhere-event-hub",
             "type": "string"
         },
@@ -18,7 +18,7 @@
             "defaultValue": "pareto-anywhere-wps",
             "type": "string"
         },
-        "storageName": {
+        "storageAccountName": {
             "defaultValue": "paretoanywherestorage",
             "type": "string"
         },
@@ -36,7 +36,7 @@
         {
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
-            "name": "[parameters('eventhubNamespaceName')]",
+            "name": "[parameters('eventHubNamespaceName')]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard",
@@ -135,7 +135,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2023-01-01",
-            "name": "[parameters('storageName')]",
+            "name": "[parameters('storageAccountName')]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard_LRS",
@@ -197,10 +197,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhubNamespaceName'), '/RootManageSharedAccessKey')]",
+            "name": "[concat(parameters('eventHubNamespaceName'), '/RootManageSharedAccessKey')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {
                 "rights": [
@@ -213,10 +213,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'))]",
+            "name": "[concat(parameters('eventHubNamespaceName'), '/', parameters('eventHubName'))]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {
                 "retentionDescription": {
@@ -231,10 +231,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/networkrulesets",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhubNamespaceName'), '/default')]",
+            "name": "[concat(parameters('eventHubNamespaceName'), '/default')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {
                 "publicNetworkAccess": "Enabled",
@@ -559,9 +559,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default')]",
+            "name": "[concat(parameters('storageAccountName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -580,9 +580,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default')]",
+            "name": "[concat(parameters('storageAccountName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -601,9 +601,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/queueServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default')]",
+            "name": "[concat(parameters('storageAccountName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "cors": {
@@ -614,9 +614,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/tableServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default')]",
+            "name": "[concat(parameters('storageAccountName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "cors": {
@@ -672,15 +672,15 @@
                         },
                         {
                             "name": "EventHubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventHubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "event_hub_name",
-                            "value": "[parameters('eventhubName')]"
+                            "value": "[parameters('eventHubName')]"
                         },
                         {
                             "name": "EventHubSendAppSetting",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventHubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "web_pub_sub_hub_name",
@@ -692,7 +692,7 @@
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageName'), ';EndpointSuffix=core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccountName'), ';EndpointSuffix=core.windows.net')]"
                         }
                     ]
                 },
@@ -855,11 +855,11 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'), '/aruba-hub-rule')]",
+            "name": "[concat(parameters('eventHubNamespaceName'), '/', parameters('eventHubName'), '/aruba-hub-rule')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubNamespaceName'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {
                 "rights": [
@@ -871,21 +871,21 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'), '/$Default')]",
+            "name": "[concat(parameters('eventHubNamespaceName'), '/', parameters('eventHubName'), '/$Default')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubNamespaceName'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {}
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-eventhub')]",
+            "name": "[concat(parameters('storageAccountName'), '/default/azure-webjobs-eventhub')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -899,10 +899,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-hosts')]",
+            "name": "[concat(parameters('storageAccountName'), '/default/azure-webjobs-hosts')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -916,10 +916,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-secrets')]",
+            "name": "[concat(parameters('storageAccountName'), '/default/azure-webjobs-secrets')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -933,10 +933,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storageName'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
+            "name": "[concat(parameters('storageAccountName'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageName'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]"
             ],
             "properties": {
                 "accessTier": "TransactionOptimized",
@@ -952,11 +952,11 @@
         },
         "event_hub_name": {
             "type": "string",
-            "value": "[parameters('eventhubName')]"
+            "value": "[parameters('eventHubName')]"
         },
-        "eventhubNamespaceName": {
+        "eventHubNamespaceName": {
             "type": "string",
-            "value": "[parameters('eventhubNamespaceName')]"
+            "value": "[parameters('eventHubNamespaceName')]"
         },
         "web_pub_sub_name": {
             "type": "string",
