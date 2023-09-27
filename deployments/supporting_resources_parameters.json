@@ -2,25 +2,22 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "region": {
-            "value": "West US"
-        },
-        "eventhub_namespace_name": {
+        "eventhubNamespaceName": {
             "value":  "aruba19508"
         },
-        "webpubsub_name": {
+        "webPubSubName": {
             "value": "pubsub2399"
         },
-        "storage_account_name": {
+        "storageName": {
             "value": "arubastorage87262"
         },
-        "function_name": {
+        "functionName": {
             "value": "amd-pareto-handler-function25"
         },
-        "iot_hub_name": {
+        "iotHubName": {
             "value": "amdparetodemoIOTHub25"
         },
-        "eventhub_name": {
+        "eventhubName": {
             "value": "arubahub20067"
         }
     }

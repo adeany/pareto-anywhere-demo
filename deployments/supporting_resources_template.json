@@ -2,31 +2,27 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "region": {
-            "defaultValue": "West US",
-            "type": "string"
-        },
-        "iot_hub_name": {
+        "iotHubName": {
             "defaultValue": "pareto-anywhere-iot-hub",
             "type": "string"
         },
-        "eventhub_namespace_name": {
+        "eventhubNamespaceName": {
             "defaultValue": "pareto-anywhere-events",
             "type": "string"
         },
-        "eventhub_name": {
+        "eventhubName": {
             "defaultValue": "pareto-anywhere-event-hub",
             "type": "string"
         },
-        "webpubsub_name": {
+        "webPubSubName": {
             "defaultValue": "pareto-anywhere-wps",
             "type": "string"
         },
-        "storage_account_name": {
+        "storageName": {
             "defaultValue": "paretoanywherestorage",
             "type": "string"
         },
-        "function_name": {
+        "functionName": {
             "defaultValue": "pareto-anywhere",
             "type": "string"
         }
@@ -40,8 +36,8 @@
         {
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
-            "name": "[parameters('eventhub_namespace_name')]",
-            "location": "[parameters('region')]",
+            "name": "[parameters('eventhubNamespaceName')]",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard",
                 "tier": "Standard",
@@ -92,8 +88,8 @@
         {
             "type": "microsoft.insights/components",
             "apiVersion": "2020-02-02",
-            "name": "[parameters('function_name')]",
-            "location": "[parameters('region')]",
+            "name": "[parameters('functionName')]",
+            "location": "[resourceGroup().location]",
             "kind": "web",
             "properties": {
                 "Application_Type": "web",
@@ -106,8 +102,8 @@
         {
             "type": "Microsoft.SignalRService/WebPubSub",
             "apiVersion": "2023-06-01-preview",
-            "name": "[parameters('webpubsub_name')]",
-            "location": "[parameters('region')]",
+            "name": "[parameters('webPubSubName')]",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Free_F1",
                 "tier": "Free",
@@ -139,8 +135,8 @@
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2023-01-01",
-            "name": "[parameters('storage_account_name')]",
-            "location": "[parameters('region')]",
+            "name": "[parameters('storageName')]",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -176,7 +172,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2022-09-01",
             "name": "[variables('serverfarms_name')]",
-            "location": "[parameters('region')]",
+            "location": "[resourceGroup().location]",
             "sku": {
                 "name": "EP1",
                 "tier": "ElasticPremium",
@@ -201,10 +197,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhub_namespace_name'), '/RootManageSharedAccessKey')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('eventhubNamespaceName'), '/RootManageSharedAccessKey')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
             ],
             "properties": {
                 "rights": [
@@ -217,10 +213,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'))]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'))]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
             ],
             "properties": {
                 "retentionDescription": {
@@ -235,10 +231,10 @@
         {
             "type": "Microsoft.EventHub/namespaces/networkrulesets",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhub_namespace_name'), '/default')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('eventhubNamespaceName'), '/default')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
             ],
             "properties": {
                 "publicNetworkAccess": "Enabled",
@@ -251,10 +247,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/degradationindependencyduration')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/degradationindependencyduration')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -275,10 +271,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/degradationinserverresponsetime')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/degradationinserverresponsetime')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -299,10 +295,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/digestMailConfiguration')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/digestMailConfiguration')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -323,10 +319,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_billingdatavolumedailyspikeextension')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_billingdatavolumedailyspikeextension')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -347,10 +343,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_canaryextension')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_canaryextension')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -371,10 +367,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_exceptionchangeextension')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_exceptionchangeextension')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -395,10 +391,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_memoryleakextension')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_memoryleakextension')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -419,10 +415,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_securityextensionspackage')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_securityextensionspackage')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -443,10 +439,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/extension_traceseveritydetector')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/extension_traceseveritydetector')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -467,10 +463,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/longdependencyduration')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/longdependencyduration')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -491,10 +487,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/migrationToAlertRulesCompleted')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/migrationToAlertRulesCompleted')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -515,10 +511,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/slowpageloadtime')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/slowpageloadtime')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -539,10 +535,10 @@
         {
             "type": "microsoft.insights/components/ProactiveDetectionConfigs",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('function_name'), '/slowserverresponsetime')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/slowserverresponsetime')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]"
             ],
             "properties": {
                 "ruleDefinitions": {
@@ -563,9 +559,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default')]",
+            "name": "[concat(parameters('storageName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -584,9 +580,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default')]",
+            "name": "[concat(parameters('storageName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -605,9 +601,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/queueServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default')]",
+            "name": "[concat(parameters('storageName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "cors": {
@@ -618,9 +614,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/tableServices",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default')]",
+            "name": "[concat(parameters('storageName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "cors": {
@@ -631,8 +627,8 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2022-09-01",
-            "name": "[parameters('function_name')]",
-            "location": "[parameters('region')]",
+            "name": "[parameters('functionName')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('serverfarms_name'))]"
             ],
@@ -641,12 +637,12 @@
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "[concat(parameters('function_name'), '.azurewebsites.net')]",
+                        "name": "[concat(parameters('functionName'), '.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "[concat(parameters('function_name'), '.scm.azurewebsites.net')]",
+                        "name": "[concat(parameters('functionName'), '.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
@@ -671,32 +667,32 @@
                             "value": "node"
                         },
                         {
-                            "name": "iot_hub_name",
-                            "value": "[parameters('iot_hub_name')]"
+                            "name": "iotHubName",
+                            "value": "[parameters('iotHubName')]"
                         },
                         {
                             "name": "EventHubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhub_namespace_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "event_hub_name",
-                            "value": "[parameters('eventhub_name')]"
+                            "value": "[parameters('eventhubName')]"
                         },
                         {
                             "name": "EventHubSendAppSetting",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhub_namespace_name'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventhubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "web_pub_sub_hub_name",
-                            "value": "[parameters('webpubsub_name')]"
+                            "value": "[parameters('webPubSubName')]"
                         },
                         {
                             "name": "WebPubSubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.SignalRService/WebPubSub', parameters('webpubsub_name')), '2023-06-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.SignalRService/WebPubSub', parameters('webPubSubName')), '2023-06-01-preview').primaryConnectionString]"
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storage_account_name'), ';EndpointSuffix=core.windows.net')]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageName'), ';EndpointSuffix=core.windows.net')]"
                         }
                     ]
                 },
@@ -717,10 +713,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('function_name'), '/ftp')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/ftp')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('functionName'))]"
             ],
             "properties": {
                 "allow": false
@@ -729,10 +725,10 @@
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('function_name'), '/scm')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/scm')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('functionName'))]"
             ],
             "properties": {
                 "allow": false
@@ -741,10 +737,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('function_name'), '/web')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/web')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('functionName'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -765,7 +761,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "[concat('$', parameters('function_name'))]",
+                "publishingUsername": "[concat('$', parameters('functionName'))]",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
@@ -819,13 +815,13 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2022-09-01",
-            "name": "[concat(parameters('function_name'), '/', parameters('function_name'), '.azurewebsites.net')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('functionName'), '/', parameters('functionName'), '.azurewebsites.net')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('function_name'))]"
+                "[resourceId('Microsoft.Web/sites', parameters('functionName'))]"
             ],
             "properties": {
-                "siteName": "[parameters('function_name')]",
+                "siteName": "[parameters('functionName')]",
                 "hostNameType": "Verified"
             }
         },
@@ -835,7 +831,7 @@
             "name": "[variables('smartdetectoralertrules_name')]",
             "location": "global",
             "dependsOn": [
-                "[resourceId('microsoft.insights/components', parameters('function_name'))]",
+                "[resourceId('microsoft.insights/components', parameters('functionName'))]",
                 "[resourceId('microsoft.insights/actionGroups', variables('actiongroups_name'))]"
             ],
             "properties": {
@@ -847,7 +843,7 @@
                     "id": "FailureAnomaliesDetector"
                 },
                 "scope": [
-                    "[resourceId('microsoft.insights/components', parameters('function_name'))]"
+                    "[resourceId('microsoft.insights/components', parameters('functionName'))]"
                 ],
                 "actionGroups": {
                     "groupIds": [
@@ -859,11 +855,11 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/authorizationrules",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'), '/aruba-hub-rule')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'), '/aruba-hub-rule')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhub_namespace_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
             ],
             "properties": {
                 "rights": [
@@ -875,21 +871,21 @@
         {
             "type": "Microsoft.EventHub/namespaces/eventhubs/consumergroups",
             "apiVersion": "2023-01-01-preview",
-            "name": "[concat(parameters('eventhub_namespace_name'), '/', parameters('eventhub_name'), '/$Default')]",
-            "location": "[parameters('region')]",
+            "name": "[concat(parameters('eventhubNamespaceName'), '/', parameters('eventhubName'), '/$Default')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhub_namespace_name'), 'arubahub20067')]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhub_namespace_name'))]"
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventhubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubNamespaceName'))]"
             ],
             "properties": {}
         },
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-eventhub')]",
+            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-eventhub')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -903,10 +899,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-hosts')]",
+            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-hosts')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -920,10 +916,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default/azure-webjobs-secrets')]",
+            "name": "[concat(parameters('storageName'), '/default/azure-webjobs-secrets')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storage_account_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "immutableStorageWithVersioning": {
@@ -937,10 +933,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2023-01-01",
-            "name": "[concat(parameters('storage_account_name'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
+            "name": "[concat(parameters('storageName'), '/default/amd-pareto-handler-function25b6ae8eec1e57')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storage_account_name'), 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storage_account_name'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageName'))]"
             ],
             "properties": {
                 "accessTier": "TransactionOptimized",
@@ -952,19 +948,19 @@
     "outputs": {
         "iot_hub": {
             "type": "string",
-            "value": "[parameters('iot_hub_name')]"
+            "value": "[parameters('iotHubName')]"
         },
         "event_hub_name": {
             "type": "string",
-            "value": "[parameters('eventhub_name')]"
+            "value": "[parameters('eventhubName')]"
         },
-        "eventhub_namespace_name": {
+        "eventhubNamespaceName": {
             "type": "string",
-            "value": "[parameters('eventhub_namespace_name')]"
+            "value": "[parameters('eventhubNamespaceName')]"
         },
         "web_pub_sub_name": {
             "type": "string",
-            "value": "[parameters('webpubsub_name')]"
+            "value": "[parameters('webPubSubName')]"
         }
     }
 }
