@@ -3,22 +3,22 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "eventHubNamespaceName": {
-            "value":  "aruba19508"
+            "value":  "amdaruba19508"
         },
         "webPubSubName": {
-            "value": "pubsub2399"
+            "value": "amdpubsub2399"
         },
         "storageAccountName": {
-            "value": "arubastorage87262"
+            "value": "amdarubastorage87262"
         },
         "functionName": {
-            "value": "amd-pareto-handler-function25"
+            "value": "amd-pareto-handler-function27"
         },
         "iotHubName": {
-            "value": "amdparetodemoIOTHub25"
+            "value": "amdparetodemoIOTHub27"
         },
         "eventHubName": {
-            "value": "arubahub20067"
+            "value": "amdarubahub20067"
         }
     }
 }
