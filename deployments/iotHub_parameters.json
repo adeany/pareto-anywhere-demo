@@ -5,12 +5,6 @@
         "region": {
             "value": null
         },
-        "iot_hub_connectionstring": {
-            "value": null
-        },
-        "iot_hub_containername": {
-            "value": null
-        },
         "iot_hub_name": {
             "value": null
         }

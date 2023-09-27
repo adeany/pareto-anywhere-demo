@@ -11,9 +11,10 @@
               "csharp"
           ]
      },
-    "forwardPorts": [
-          8400
-     ],
+     "forwardPorts": [ 7071 ],
+     "portsAttributes": {
+       "7071": { "label": "function-app-preview" }
+     },
      "build": {
       "commands": [
           "dotnet tool install --global dotnet-sdk-latest"

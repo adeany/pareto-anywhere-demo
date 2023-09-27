@@ -17,17 +17,16 @@ Learn more at: [www.reelyactive.com/pareto/anywhere/integrations/azure/](https:/
 Getting Started
 ---------------
 
+
 Follow our step-by-step tutorial to deploy __Pareto Anywhere for Azure__:
 - [Run Pareto Anywhere for Azure](https://reelyactive.github.io/diy/pareto-anywhere-azure/)
 
+Deploy the supporting Azure resources using the following template:
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fadeany%2Fpareto-anywhere-demo%2Fmain%2Fdeployments%2Fsupporting_resources_template.json)
+
 Learn "owl" about the __dynamb__ JSON data output:
 - [Developer's Cheatsheet](https://reelyactive.github.io/diy/cheatsheet/)
-
-Production Installation
------------------------
-```
-To-Do Add Github Actions Procedure
-```
 
 Installation
 ------------
@@ -105,7 +104,7 @@ An example of an event from a temperature & humidity sensor would be as follows:
 Web App
 -------
 
-The web app provides an intuitive visualisation of the real-time event stream:
+The web app provides an intuitive visualization of the real-time event stream:
 
 ![Pareto Anywhere for Azure web app](https://reelyactive.github.io/pareto-anywhere-azure/images/web-app-screenshot.png)
 
