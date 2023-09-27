@@ -3,25 +3,25 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "region": {
-            "value": null
+            "value": "West US"
         },
         "eventhub_namespace_name": {
-            "value":  null
+            "value":  "aruba19508"
         },
         "webpubsub_name": {
-            "value": null
+            "value": "pubsub2399"
         },
         "storage_account_name": {
-            "value": null
+            "value": "arubastorage87262"
         },
         "function_name": {
-            "value": null
+            "value": "amd-pareto-handler-function25"
         },
         "iot_hub_name": {
-            "value": null
+            "value": "amdparetodemoIOTHub25"
         },
         "eventhub_name": {
-            "value": null
+            "value": "arubahub20067"
         }
     }
 }
