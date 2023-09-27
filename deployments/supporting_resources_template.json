@@ -284,6 +284,10 @@
                             "value": "node"
                         },
                         {
+                            "name": "WEBSITE_ENABLE_SYNC_UPDATE_SITE",
+                            "value": true
+                        },
+                        {
                             "name": "WEBSITE_RUN_FROM_PACKAGE",
                             "value": 1
                         },
@@ -343,7 +347,7 @@
             "name": "[concat(parameters('eventHubNamespaceName'), '/', parameters('eventHubName'), '/aruba-hub-rule')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), parameters('eventHubName'))]",
                 "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {
@@ -359,7 +363,7 @@
             "name": "[concat(parameters('eventHubNamespaceName'), '/', parameters('eventHubName'), '/$Default')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), 'arubahub20067')]",
+                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), parameters('eventHubName'))]",
                 "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]"
             ],
             "properties": {}
