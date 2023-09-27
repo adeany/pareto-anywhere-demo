@@ -30,7 +30,8 @@
     "variables": {
         "actiongroups_name": "Application Insights Smart Detection",
         "serverfarms_name": "pareto-anywhere-iot-hub",
-        "smartdetectoralertrules_name": "failure anomalies - pareto-anywhere"
+        "smartdetectoralertrules_name": "failure anomalies - pareto-anywhere",
+        "functionPackageUri": "https://raw.githubusercontent.com/adeany/pareto-anywhere-demo/main/pareto-anywhere-azure-master.zip"
     },
     "resources": [
         {
@@ -708,7 +709,21 @@
                 "redundancyMode": "None",
                 "storageAccountRequired": false,
                 "keyVaultReferenceIdentity": "SystemAssigned"
-            }
+            },
+            "resources": [
+                {
+                    "name": "MSDeploy",
+                    "type": "Extensions",
+                    "location": "[resourceGroup().location]",
+                    "apiVersion": "2015-08-01",
+                    "dependsOn": [
+                        "[concat('Microsoft.Web/sites/', parameters('functionName'))]"
+                    ],
+                    "properties": {
+                        "packageUri": "[variables('functionPackageUri')]"
+                    }
+                }
+            ],
         },
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
