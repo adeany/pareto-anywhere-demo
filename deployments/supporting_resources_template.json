@@ -29,7 +29,7 @@
     },
     "variables": {
         "planName": "[concat('pareto-anywhere-pln', uniqueString(resourceGroup().id))]", 
-        "functionPackageUri": "https://raw.githubusercontent.com/adeany/pareto-anywhere-demo/adeany-stage/pareto-anywhere.zip"
+        "functionPackageUri": "https://raw.githubusercontent.com/adeany/pareto-anywhere-demo/main/pareto-anywhere.zip"
     },
     "resources": [
         {
