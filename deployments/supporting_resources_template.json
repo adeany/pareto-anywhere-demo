@@ -723,7 +723,7 @@
                         "packageUri": "[variables('functionPackageUri')]"
                     }
                 }
-            ],
+            ]
         },
         {
             "type": "Microsoft.Web/sites/basicPublishingCredentialsPolicies",
