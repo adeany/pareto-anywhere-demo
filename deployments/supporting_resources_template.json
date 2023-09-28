@@ -330,13 +330,17 @@
                         {
                             "name": "FUNCTIONS_EXTENSION_VERSION",
                             "value": "~4"
+                        },
+                        {
+                            "name": "WEBSITE_RUN_FROM_PACKAGE",
+                            "value": "1"
                         }
                     ]
                 }
             },
             "resources": [
                 {
-                    "name": "MSDeploy",
+                    "name": "ZipDeploy",
                     "type": "Extensions",
                     "location": "[resourceGroup().location]",
                     "apiVersion": "2021-02-01",
