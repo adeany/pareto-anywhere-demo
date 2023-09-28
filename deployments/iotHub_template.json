@@ -2,84 +2,56 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "region": {
-            "defaultValue": "West US",
-            "type": "string"
-        },
-        "iot_hub_name": {
-            "defaultValue": "amdparetodemoIOTHub25",
-            "type": "string"
+      "iotHubName": {
+        "type": "string",
+        "metadata": {
+          "description": "Specify the name of the Iot hub."
         }
+      },
+      "deviceProvisioningServiceName": {
+        "type": "string",
+        "metadata": {
+          "description": "Specify the name of the provisioning service."
+        }
+      }
     },
-    "variables": {},
+    "variables": {
+      "iotHubKey": "iothubowner",
+      "skuName": "S1",
+      "skuUnits": 1
+    },
     "resources": [
-        {
-            "type": "Microsoft.Devices/IotHubs",
-            "apiVersion": "2023-06-30",
-            "name": "[parameters('iot_hub_name')]",
-            "location": "[parameters('region')]",
-            "sku": {
-                "name": "F1",
-                "tier": "Free",
-                "capacity": 1
-            },
-            "identity": {
-                "type": "None"
-            },
-            "properties": {
-                "ipFilterRules": [],
-                "eventHubEndpoints": {
-                    "events": {
-                        "retentionTimeInDays": 1,
-                        "partitionCount": 2
-                    }
-                },
-                "routing": {
-                    "endpoints": {
-                        "serviceBusQueues": [],
-                        "serviceBusTopics": [],
-                        "eventHubs": [],
-                        "storageContainers": [],
-                        "cosmosDBSqlContainers": []
-                    },
-                    "routes": [],
-                    "fallbackRoute": {
-                        "name": "$fallback",
-                        "source": "DeviceMessages",
-                        "condition": "true",
-                        "endpointNames": [
-                            "events"
-                        ],
-                        "isEnabled": true
-                    }
-                },
-                "storageEndpoints": {},
-                "messagingEndpoints": {
-                    "fileNotifications": {
-                        "lockDurationAsIso8601": "PT5S",
-                        "ttlAsIso8601": "PT1H",
-                        "maxDeliveryCount": 10
-                    }
-                },
-                "enableFileUploadNotifications": false,
-                "cloudToDevice": {
-                    "maxDeliveryCount": 10,
-                    "defaultTtlAsIso8601": "PT1H",
-                    "feedback": {
-                        "lockDurationAsIso8601": "PT5S",
-                        "ttlAsIso8601": "PT1H",
-                        "maxDeliveryCount": 10
-                    }
-                },
-                "features": "RootCertificateV2",
-                "allowedFqdnList": []
+      {
+        "type": "Microsoft.Devices/IotHubs",
+        "apiVersion": "2021-07-02",
+        "name": "[parameters('iotHubName')]",
+        "location": "[resourceGroup().location]",
+        "sku": {
+          "name": "[variables('skuName')]",
+          "capacity": "[variables('skuUnits')]"
+        },
+        "properties": {}
+      },
+      {
+        "type": "Microsoft.Devices/provisioningServices",
+        "apiVersion": "2022-02-05",
+        "name": "[parameters('deviceProvisioningServiceName')]",
+        "location": "[resourceGroup().location]",
+        "sku": {
+          "name": "[variables('skuName')]",
+          "capacity": "[variables('skuUnits')]"
+        },
+        "properties": {
+          "iotHubs": [
+            {
+              "connectionString": "[format('HostName={0};SharedAccessKeyName={1};SharedAccessKey={2}', reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').hostName, variables('iotHubKey'), listkeys(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').value[0].primaryKey)]",
+              "location": "[resourceGroup().location]"
             }
-        }
-    ],
-    "outputs": {
-        "iot_hub_name": {
-            "type": "string",
-            "value": "[parameters('iot_hub_name')]"
-        }
-    }
-}
+          ]
+        },
+        "dependsOn": [
+          "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]"
+        ]
+      }
+    ]
+  }
