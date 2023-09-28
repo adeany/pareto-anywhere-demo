@@ -364,14 +364,6 @@
                             "value": "[parameters('functionName')]" 
                         },
                         {
-                            "name": "iot_hub_name",
-                            "value": "[listkeys(resourceId('Microsoft.Devices/IotHubs/eventHubEndpoints', parameters('iotHubName'), 'events'), '2021-07-02').name]"
-                        },
-                        {
-                            "name": "EventHubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.Devices/IotHubs/eventHubEndpoints', parameters('iotHubName'), 'events'), '2021-07-02').endpoint]"
-                        },
-                        {
                             "name": "event_hub_name",
                             "value": "[parameters('eventHubName')]"
                         },
