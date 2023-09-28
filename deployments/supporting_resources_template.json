@@ -3,35 +3,94 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "iotHubName": {
+            "type": "string",
             "defaultValue": "pareto-anywhere-iot-hub",
-            "type": "string"
+            "metadata": {
+              "description": "Specify the name of the Iot hub."
+            }
+        },
+        "deviceProvisioningServiceName": {
+            "type": "string",
+            "metadata": {
+              "description": "Specify the name of the provisioning service."
+            }
         },
         "eventHubNamespaceName": {
             "defaultValue": "pareto-anywhere-events",
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of the Event Hub Namespace."
+            }
         },
         "eventHubName": {
             "defaultValue": "pareto-anywhere-event-hub",
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of the Event Hub."
+            }
         },
         "webPubSubName": {
             "defaultValue": "pareto-anywhere-wps",
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of the Web PubSub Service."
+            }
         },
         "storageAccountName": {
             "defaultValue": "paretoanywherestorage",
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of the Storage Account."
+            }
         },
         "functionName": {
             "defaultValue": "pareto-anywhere",
-            "type": "string"
+            "type": "string",
+            "metadata": {
+                "description": "Specify the name of the Function App."
+            }
         }
     },
     "variables": {
         "planName": "[concat('pareto-anywhere-pln', uniqueString(resourceGroup().id))]", 
-        "functionPackageUri": "https://raw.githubusercontent.com/adeany/pareto-anywhere-demo/main/pareto-anywhere.zip"
+        "functionPackageUri": "https://raw.githubusercontent.com/adeany/pareto-anywhere-demo/main/pareto-anywhere.zip",
+        "iotHubKey": "iothubowner",
+        "iotHubSkuName": "S1",
+        "iotHubSkuUnits": 1
     },
     "resources": [
+        {
+            "type": "Microsoft.Devices/IotHubs",
+            "apiVersion": "2021-07-02",
+            "name": "[parameters('iotHubName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+              "name": "[variables('iotHubSkuName')]",
+              "capacity": "[variables('iotHubSkuUnits')]"
+            },
+            "properties": {}
+          },
+          {
+            "type": "Microsoft.Devices/provisioningServices",
+            "apiVersion": "2022-02-05",
+            "name": "[parameters('deviceProvisioningServiceName')]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+              "name": "[variables('iotHubSkuName')]",
+              "capacity": "[variables('iotHubSkuUnits')]"
+            },
+            "properties": {
+              "iotHubs": [
+                {
+                  "connectionString": "[format('HostName={0};SharedAccessKeyName={1};SharedAccessKey={2}', reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').hostName, variables('iotHubKey'), listkeys(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').value[0].primaryKey)]",
+                  "location": "[resourceGroup().location]"
+                }
+              ]
+            },
+            "dependsOn": [
+              "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]"
+            ]
+        },
         {
             "type": "Microsoft.EventHub/namespaces",
             "apiVersion": "2023-01-01-preview",
@@ -271,6 +330,7 @@
             "name": "[parameters('functionName')]",
             "location": "[resourceGroup().location]",
             "dependsOn": [
+                "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]",
                 "[resourceId('Microsoft.Web/serverfarms', variables('planName'))]"
             ],
             "kind": "functionapp,linux",
@@ -301,11 +361,11 @@
                         },
                         {
                             "name": "iot_hub_name",
-                            "value": "[parameters('iotHubName')]"
+                            "value": "[listkeys(resourceId('Microsoft.Devices/IotHubs/eventHubEndpoints', parameters('iotHubName'), 'events'), '2021-07-02').name]"
                         },
                         {
                             "name": "EventHubConnectionString",
-                            "value": "[listkeys(resourceId('Microsoft.EventHub/namespaces/authorizationrules', parameters('eventHubNamespaceName'), 'RootManageSharedAccessKey'), '2023-01-01-preview').primaryConnectionString]"
+                            "value": "[listkeys(resourceId('Microsoft.Devices/IotHubs/eventHubEndpoints', parameters('iotHubName'), 'events'), '2021-07-02').endpoint]"
                         },
                         {
                             "name": "event_hub_name",
@@ -330,17 +390,13 @@
                         {
                             "name": "FUNCTIONS_EXTENSION_VERSION",
                             "value": "~4"
-                        },
-                        {
-                            "name": "WEBSITE_RUN_FROM_PACKAGE",
-                            "value": "1"
                         }
                     ]
                 }
             },
             "resources": [
                 {
-                    "name": "ZipDeploy",
+                    "name": "MSDeploy",
                     "type": "Extensions",
                     "location": "[resourceGroup().location]",
                     "apiVersion": "2021-02-01",
