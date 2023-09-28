@@ -331,11 +331,7 @@
             "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName'))]",
-                "[resourceId('Microsoft.EventHub/namespaces/eventhubs', parameters('eventHubNamespaceName'), parameters('eventHubName'))]",
-                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventHubNamespaceName'))]",
-                "[resourceId('Microsoft.Web/serverfarms', variables('planName'))]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
-                "[resourceId('Microsoft.SignalRService/WebPubSub', parameters('webPubSubName'))]"
+                "[resourceId('Microsoft.Web/serverfarms', variables('planName'))]"
             ],
             "kind": "functionapp,linux",
             "properties": {
