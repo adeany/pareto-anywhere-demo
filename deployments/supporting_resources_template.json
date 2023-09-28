@@ -377,7 +377,7 @@
                         },
                         {
                             "name": "EventHubConnectionString",
-                            "value": "[reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').eventHubEndpoints.events.endpoint]"
+                            "value": "[format('Endpoint={0};SharedAccessKeyName={1};SharedAccessKey={2};EntityPath={3}', reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').eventHubEndpoints.events.endpoint, variables('iotHubKey'), listkeys(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').value[0].primaryKey, reference(resourceId('Microsoft.Devices/IotHubs', parameters('iotHubName')), '2021-07-02').eventHubEndpoints.events.path)]"
                         },
                         {
                             "name": "web_pub_sub_hub_name",
