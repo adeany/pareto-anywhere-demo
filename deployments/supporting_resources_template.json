@@ -4,7 +4,6 @@
     "parameters": {
         "iotHubName": {
             "type": "string",
-            "defaultValue": "pareto-anywhere-iot-hub",
             "metadata": {
               "description": "Specify the name of the Iot hub."
             }
@@ -16,28 +15,24 @@
             }
         },
         "eventHubNamespaceName": {
-            "defaultValue": "pareto-anywhere-events",
             "type": "string",
             "metadata": {
                 "description": "Specify the name of the Event Hub Namespace."
             }
         },
         "eventHubName": {
-            "defaultValue": "pareto-anywhere-event-hub",
             "type": "string",
             "metadata": {
                 "description": "Specify the name of the Event Hub."
             }
         },
         "webPubSubName": {
-            "defaultValue": "pareto-anywhere-wps",
             "type": "string",
             "metadata": {
                 "description": "Specify the name of the Web PubSub Service."
             }
         },
         "storageAccountName": {
-            "defaultValue": "paretoanywherestorage",
             "type": "string",
             "metadata": {
                 "description": "Specify the name of the Storage Account."
