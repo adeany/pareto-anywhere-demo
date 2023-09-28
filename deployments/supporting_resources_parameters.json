@@ -17,6 +17,9 @@
         "iotHubName": {
             "value": "amdparetodemoIOTHub27"
         },
+        "deviceProvisioningServiceName": {
+            "value": "amdparetodemoDPS27"
+        },
         "eventHubName": {
             "value": "amdarubahub20067"
         }
