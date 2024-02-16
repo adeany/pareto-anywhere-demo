@@ -21,7 +21,7 @@
         {
             "type": "Microsoft.Web/sites/extensions",
             "apiVersion": "2022-03-01",
-            "name": "[format('{0}/{1}', parameters('functionName'), 'zipdeploy')]",
+            "name": "[format('{0}/{1}', parameters('functionAppName'), 'zipdeploy')]",
             "properties": {
               "packageUri": "[parameters('functionPackageUri')]"
             }
