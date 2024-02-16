@@ -19,19 +19,11 @@
     },
     "resources": [
         {
-            "type": "Microsoft.Web/sites",
-            "name": "[parameters('functionAppName')]",
+            "type": "Microsoft.Web/sites/extensions",
             "apiVersion": "2022-03-01",
-            "location": "[resourceGroup().location]",
+            "name": "[format('{0}/{1}', parameters('functionName'), 'zipdeploy')]",
             "properties": {
-                "siteConfig": {
-                    "appSettings": [
-                        {
-                            "name": "WEBSITE_RUN_FROM_PACKAGE",
-                            "value": "[parameters('functionPackageUri')]"
-                        }
-                    ]
-                }
+              "packageUri": "[parameters('functionPackageUri')]"
             }
         }
     ]
